@@ -1,17 +1,60 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <TheButton
+      label="hello"
+      code="A"
+      :selectedCode="selectedCode"
+      @myclick="selectCode">
+      <TheButton
+        label="apasih"
+        code="B"
+        :selectedCode="selectedCode"
+        @myclick="selectCode">
+        <TheButton
+          label="gitudong"
+          code="C"
+          :selectedCode="selectedCode"
+          @myclick="selectCode">
+          okede
+        </TheButton>
+      </TheButton>
+      <TheButton
+          label="gini sih"
+          code="D"
+          :selectedCode="selectedCode"
+          @myclick="selectCode">
+        <TheButton
+            label="o gni"
+            code="E"
+            :selectedCode="selectedCode"
+            @myclick="selectCode">
+          oke yuk
+        </TheButton>
+      </TheButton>
+    </TheButton>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// import HelloWorld from './components/HelloWorld.vue'
+import TheButton from './components/TheButton'
 
 export default {
   name: 'App',
+  data () {
+    return {
+      selectedCode: ''
+    }
+  },
   components: {
-    HelloWorld
+    TheButton
+  },
+  methods: {
+    selectCode (val) {
+      console.log(val)
+      this.selectedCode = val
+    }
   }
 }
 </script>

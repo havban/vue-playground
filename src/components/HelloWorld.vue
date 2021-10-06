@@ -1,6 +1,14 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
+    <p>mapped: {{mappedX}}</p>
+    <p>filtered: {{filteredX}}</p>
+    <p>sum: {{sumX}}</p>
+    <p>sumOfX: {{sumOfX}}</p>
+    <p>doSumOfX: {{doSumOfX()}}</p>
+    <input type="text" v-model="txt"/>
+    {{txt}}
+    <button @click="clickDong">Klik dong</button>
     <p>
       For a guide and recipes on how to configure / customize this project,<br>
       check out the
@@ -31,10 +39,71 @@
 </template>
 
 <script>
+import isOdd from 'is-odd-num'
+
+const VAR_A = 4
+
 export default {
   name: 'HelloWorld',
+  data () {
+    return {
+      x: [1, 7, 6],
+      txt: '',
+      sumOfX: 0
+    }
+  },
   props: {
     msg: String
+  },
+  computed: {
+    isOdd () {
+      return isOdd(VAR_A)
+    },
+    mappedX () {
+      // let newX = []
+      // for (let i=0; i < this.x.length; i++) {
+      //   newX.push('hello ' + this.x[i])
+      // }
+      // return newX
+
+      // return this.x.map(i => 'hello ' + i)
+      return this.x.map( ( i, idx) => {
+        // return '[' + idx + '] hello ' + i
+        return `[${idx}] hello ${i}`
+      })
+      // return this.x.map(function (i) {
+      //   return 'hello ' + i
+      // })
+    },
+    filteredX () {
+      return this.x.filter(i => {
+        return i % 2 === 0
+      })
+    },
+    sumX () {
+      return this.x.reduce((acc, i) => {
+        return acc + i
+      }, 0)
+    }
+  },
+  methods: {
+    clickDong () {
+      this.x.push(this.txt)
+    },
+    doSumOfX () {
+      this.sumOfX = this.x.reduce((acc, i) => {
+        return acc + i
+      }, 0)
+      return this.sumOfX
+    }
+  },
+  watch: {
+    x () {
+      this.doSumOfX()
+    }
+  },
+  mounted () {
+    this.doSumOfX()
   }
 }
 </script>
